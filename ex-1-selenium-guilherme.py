@@ -16,23 +16,22 @@ browser.get(url)
 
 browser.implicitly_wait(2)
 
-dict_h1 = {}
-dict_p = {}
-
-h1 = browser.find_element_by_tag_name('h1')
-
 list_p = browser.find_elements_by_tag_name('p')
 
-# Ver o que tem dentro das coisas: dir(objeto)
+h1 = browser.find_element_by_tag_name('h1').text
 
-for i in range(len(list_p)):
-    dict_p[list_p[i].get_attribute('atributo')] = list_p[i].text
+attributes_dict = {}
 
-# list_p[i] é um elemento da lista, melhor escrever:
-# for element in list p:
-#   dict_p[element.get_attribute('atributo')] = element.text
+# Outra solução:
+# Parecida com a minha mas menos "convoluted"
+# Em vez de usar os índices da lista,
+# Pega cada atributo de cada p individualmente,
+# e adiciona no dict
 
-dict_h1 = {h1.text: dict_p}
+for p in list_p:
+    attributes_dict[p.get_attribute('atributo')] = p.text
+
+dict_h1 = {h1: attributes_dict}
 
 print(dict_h1)
 
