@@ -8,7 +8,7 @@
 
 from selenium.webdriver import Chrome
 
-url = "https://curso-python-selenium.netlify.app/exercicio_01.html"
+url = "https://selenium.dunossauro.live/exercicio_01.html"
 
 browser = Chrome()
 
@@ -28,6 +28,8 @@ list_p = browser.find_elements_by_tag_name('p')
 for i in range(len(list_p)):
     dict_p[list_p[i].get_attribute('atributo')] = list_p[i].text
 
-dict_h1 = {h1.tag_name: dict_p}
+dict_h1 = {h1.text: dict_p}
 
 print(dict_h1)
+
+browser.close()
