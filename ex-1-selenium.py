@@ -23,6 +23,8 @@ h1 = browser.find_element_by_tag_name('h1')
 
 list_p = browser.find_elements_by_tag_name('p')
 
+# Ver o que tem dentro das coisas: dir(objeto)
+
 for i in range(len(list_p)):
     dict_p[list_p[i].get_attribute('atributo')] = list_p[i].text
 
