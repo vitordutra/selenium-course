@@ -2,6 +2,8 @@
 
 from selenium.webdriver import Firefox
 from time import sleep
+from urllib.parse import urlparse
+from json import loads
 
 firefox = Firefox()
 
@@ -24,8 +26,18 @@ def preencher_form(browser, nome, email, senha, telefone):
     browser.find_element_by_name('btn').click()
 
 
-preencher_form(firefox, "João", "joao@joao.com", "senha123", "987654321")
+dict_test = {
+    'nome': "João",
+    'email': "joao@joao.com",
+    'senha': "senha123",
+    'telefone': "987654321"
+}
 
+preencher_form(firefox, **dict_test)
+
+parsed_url = urlparse(firefox.current_url)
+
+sleep(1)
 
 # ? query string
 """
@@ -41,3 +53,11 @@ telefone=987654321
 &
 btn=Enviar%21#
 """
+
+result_text = firefox.find_element_by_id('result').text
+corrected_text = result_text.replace('\'', "\"")
+dict_result = loads(corrected_text)
+
+# assert == garanta
+
+assert dict_result == dict_test
